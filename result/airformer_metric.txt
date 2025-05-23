@@ -1,0 +1,42 @@
+============== Train Info ==============
+Dataset number: 3
+Model: Airformer
+Train: 2016-09-01T00:00:00+00:00 --> 2016-11-30T00:00:00+00:00
+Val: 2016-12-01T00:00:00+00:00 --> 2016-12-31T00:00:00+00:00
+Test: 2017-01-01T00:00:00+00:00 --> 2017-01-31T00:00:00+00:00
+City number: 13
+Use metero: ['2m_temperature', 'boundary_layer_height', 'k_index', 'relative_humidity+950', 'surface_pressure', 'total_precipitation', 'u_component_of_wind+950', 'v_component_of_wind+950']
+batch_size: 32
+epochs: 50
+hist_len: 8
+pred_len: 8
+cycle_len: 8
+weight_decay: 1e-05
+early_stop: 10
+lr: 0.001
+========================================
+Airformer(
+  (fc_in): Linear(in_features=13, out_features=32, bias=True)
+  (fc_out): Linear(in_features=32, out_features=1, bias=True)
+  (gru_cell): GRUCell(
+    (x2h): Linear(in_features=32, out_features=96, bias=True)
+    (h2h): Linear(in_features=32, out_features=96, bias=True)
+  )
+)---------------------------------------
+train_loss | mean: 0.2784 std: 0.0102
+val_loss   | mean: 0.3044 std: 0.0033
+test_loss  | mean: 0.4040 std: 0.0084
+RMSE       | mean: 37.4006 std: 0.3669
+MAE        | mean: 22.2471 std: 0.2347
+CSI        | mean: 0.8840 std: 0.0024
+POD        | mean: 0.9721 std: 0.0043
+FAR        | mean: 0.0930 std: 0.0048
+MAPE        | mean: 0.3185 std: 0.0081
+
+=================== Model Info ===================
+model params: 6817
+GPU memory usage during training: 10.7476GB
+GPU memory usage during testing: 0.1113GB
+Training time: 96.1645s
+Inference time: 0.2801s
+Model file path: E:/jupyter/match/create/data/results\8_8\3\Airformer\20250331212859\09\model.pth

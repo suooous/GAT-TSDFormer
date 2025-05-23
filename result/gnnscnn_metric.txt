@@ -1,0 +1,56 @@
+============== Train Info ==============
+Dataset number: 3
+Model: PM25_GNN_SCNN
+Train: 2016-09-01T00:00:00+00:00 --> 2016-11-30T00:00:00+00:00
+Val: 2016-12-01T00:00:00+00:00 --> 2016-12-31T00:00:00+00:00
+Test: 2017-01-01T00:00:00+00:00 --> 2017-01-31T00:00:00+00:00
+City number: 13
+Use metero: ['2m_temperature', 'boundary_layer_height', 'k_index', 'relative_humidity+950', 'surface_pressure', 'total_precipitation', 'u_component_of_wind+950', 'v_component_of_wind+950']
+batch_size: 32
+epochs: 50
+hist_len: 8
+pred_len: 8
+cycle_len: 8
+weight_decay: 1e-05
+early_stop: 10
+lr: 0.001
+========================================
+PM25_GNN_SCNN(
+  (graph_gnn): GraphGNN(
+    (edge_mlp): Sequential(
+      (0): Linear(in_features=29, out_features=32, bias=True)
+      (1): Sigmoid()
+      (2): Linear(in_features=32, out_features=30, bias=True)
+      (3): Sigmoid()
+    )
+    (node_mlp): Sequential(
+      (0): Linear(in_features=30, out_features=13, bias=True)
+      (1): Sigmoid()
+    )
+  )
+  (time_module): TimeSeriesModule(
+    (input_projection): Conv2d(26, 64, kernel_size=(1, 1), stride=(1, 1))
+    (fusion_conv): Conv2d(384, 64, kernel_size=(1, 1), stride=(1, 1))
+    (output_layer): Conv2d(64, 1, kernel_size=(1, 1), stride=(1, 1))
+    (poly): Conv2d(384, 128, kernel_size=(1, 1), stride=(1, 1))
+    (residual_conv): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1))
+    (skip_conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1))
+  )
+)---------------------------------------
+train_loss | mean: 0.4521 std: 0.0119
+val_loss   | mean: 0.4371 std: 0.0049
+test_loss  | mean: 0.5717 std: 0.0062
+RMSE       | mean: 46.7061 std: 0.5004
+MAE        | mean: 28.5324 std: 0.3397
+CSI        | mean: 0.8196 std: 0.0049
+POD        | mean: 0.9728 std: 0.0035
+FAR        | mean: 0.1612 std: 0.0071
+MAPE        | mean: 0.6192 std: 0.0228
+
+=================== Model Info ===================
+model params: 160191
+GPU memory usage during training: 111.9551GB
+GPU memory usage during testing: 1.3657GB
+Training time: 336.9035s
+Inference time: 1.1968s
+Model file path: E:/jupyter/match/create/data/results\8_8\3\PM25_GNN_SCNN\20250402105021\09\model.pth
